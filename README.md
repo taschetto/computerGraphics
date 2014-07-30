@@ -1,4 +1,4 @@
 computerGraphics
 ================
 
-Academic projects for Compuer Graphics course (PUCRS 2014/2).
+Academic projects for Computer Graphics course (PUCRS 2014/2).
