@@ -35,6 +35,8 @@ void on_trackbar(int)
 	//cvThreshold( g_gray, g_gray, g_thresh, 255, CV_THRESH_TOZERO_INV );
 	//cvThreshold( g_gray, g_gray, g_thresh, 255, CV_THRESH_TRUNC );
 
+	cvShowImage("Binary", g_gray);
+
 	cvFindContours( g_gray, g_storage, &contours );
 	cvZero( g_gray );
 
@@ -52,6 +54,7 @@ int main( int argc, char** argv )
 	cvNamedWindow( "GrayScale", 1 );
 	cvNamedWindow( "Contours", 1 );
 	cvNamedWindow( "Original", 1 );
+	cvNamedWindow( "Binary", 1 );
 	cvShowImage( "Original", image );
 
 	// int cvCreateTrackbar( const char* trackbar_name, const char* window_name, int* value, int count, CvTrackbarCallback on_change );
