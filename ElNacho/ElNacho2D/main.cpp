@@ -1,4 +1,6 @@
+#include <iostream>
 #include "LUtil.h"
+#include "Maze.h"
 
 void runMainLoop(int val);
 /*
@@ -12,6 +14,11 @@ Side Effects:
 
 int main(int argc, char* args[])
 {
+  Maze* maze = new Maze(3, 3);
+  maze->Generate();
+  maze->Print();
+  delete maze;
+
   glutInit(&argc, args);
 
   //Create OpenGL 2.1 context
