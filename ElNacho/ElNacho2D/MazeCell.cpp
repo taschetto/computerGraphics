@@ -1,8 +1,7 @@
 #include "MazeCell.h"
 
-
 MazeCell::MazeCell()
-  : visited(false)
+: visited(false), order(0)
 {
   walls.insert(North);
   walls.insert(South);
@@ -52,4 +51,9 @@ void MazeCell::Carve(Direction direction)
 std::set<Direction> MazeCell::GetWalls()
 {
   return walls;
+}
+
+bool MazeCell::HasWall(Direction direction)
+{
+  return walls.find(direction) != walls.end();
 }

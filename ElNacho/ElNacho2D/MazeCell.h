@@ -12,9 +12,14 @@ private:
   bool visited;
 
 public:
+  int order;
   MazeCell();
   ~MazeCell();
 
+  void SetOrder(int o)
+  {
+    order = o;
+  }
   void SetY(size_t);
   void SetX(size_t);
   size_t GetY();
@@ -24,5 +29,6 @@ public:
   bool IsVisited();
   void Visit();
   void Carve(Direction);
+  bool HasWall(Direction);
 };
 

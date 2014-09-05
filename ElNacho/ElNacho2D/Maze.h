@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include <vector>
 #include "Direction.h"
 #include "MazeCell.h"
 
@@ -14,11 +15,18 @@ private:
   std::map<Direction, size_t> Dx;
   std::map<Direction, size_t> Dy;
   std::map<Direction, Direction> Oposite;
+
+  std::vector<Direction> Directions(MazeCell mazeCell);
+
 public:
   Maze(size_t, size_t);
   virtual ~Maze();
 
+  size_t GetWidth();
+  size_t GetHeight();
   void Generate();
-  void Print();
+  std::vector<MazeCell*> Cells();
+
+  void Dump();
 };
 

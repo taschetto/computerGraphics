@@ -48,24 +48,38 @@ Maze::~Maze()
   delete[] grid;
 }
 
+size_t Maze::GetWidth()
+{
+  return width;
+}
+
+size_t Maze::GetHeight()
+{
+  return height;
+}
+
 void Maze::Generate()
 {
-  stack<MazeCell> cells;
-  cells.push(grid[rand() % height][rand() % width]);
+  MazeCell* initial = &grid[rand() % height][rand() % width];
+  initial->Visit();
+  int order = 1;
+  initial->SetOrder(order++);
 
+  stack<MazeCell*> cells;
+  cells.push(initial);
   while (cells.size() > 0)
   {
-    MazeCell cell = cells.top();
-    cells.pop();
-
-    size_t y = cell.GetY();
-    size_t x = cell.GetX();
+    MazeCell* cell = cells.top();
+    
+    size_t y = cell->GetY();
+    size_t x = cell->GetX();
 
     std::vector<Direction> directions = { North, South, East, West };
 
     unsigned seed = (unsigned)std::chrono::system_clock::now().time_since_epoch().count();
     std::shuffle(directions.begin(), directions.end(), std::default_random_engine(seed));
 
+    bool any = false;
     for (Direction d : directions)
     {
       size_t ny = y + Dy[d];
@@ -73,34 +87,49 @@ void Maze::Generate()
 
       if (nx >= 0 && ny >= 0 && nx < width && ny < height && !grid[ny][nx].IsVisited())
       {
+        any = true;
         grid[ny][nx].Visit();
 
         grid[y][x].Carve(d);
         grid[ny][nx].Carve(Oposite[d]);
 
-        cells.push(grid[ny][nx]);
+        grid[ny][nx].SetOrder(order++);
+
+        cells.push(&grid[ny][nx]);
 
         break;
       }
     }
+    if (!any) cells.pop();
   }
 }
 
-void Maze::Print()
+std::vector<MazeCell*> Maze::Cells()
+{
+  std::vector<MazeCell*> cells;
+
+  for (size_t y = 0; y < height; y++)
+  {
+    for (size_t x = 0; x < width; x++)
+    {
+      cells.push_back(&grid[y][x]);
+    }
+  }
+
+  return cells;
+}
+
+void Maze::Dump()
 {
   for (size_t y = 0; y < height; y++)
   {
     for (size_t x = 0; x < width; x++)
     {
-      MazeCell cell = grid[y][x];
-
-      cout << y << "," << x << ":";
-
-      for (Direction d : cell.GetWalls())
-      {
-        cout << " " << d;
-      }
-
+      cout << x << "," << y << " ... ";
+      if (grid[y][x].HasWall(North)) cout << 'N';
+      if (grid[y][x].HasWall(South)) cout << 'S';
+      if (grid[y][x].HasWall(West)) cout << 'W';
+      if (grid[y][x].HasWall(East)) cout << 'E';
       cout << endl;
     }
   }
