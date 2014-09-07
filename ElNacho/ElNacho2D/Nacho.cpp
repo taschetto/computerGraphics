@@ -2,9 +2,9 @@
 
 Nacho::Nacho(Maze* maze)
 : maze(maze)
-, x(0)
-, y(0)
 {
+  x = maze->GetInitial()->GetX();
+  y = maze->GetInitial()->GetY();
 }
 
 Nacho::~Nacho()

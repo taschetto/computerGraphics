@@ -13,7 +13,7 @@ private:
   Cell** grid;
 
   Cell* initial;
-  Cell* final;
+  Cell* goal;
 
   std::vector<Direction> Directions(Cell cell);
 
@@ -26,6 +26,7 @@ public:
   void Generate();
   Cell* At(size_t x, size_t y);
   std::vector<Cell*> Cells();
+  Cell* GetInitial();
 
   void Dump();
 };

@@ -40,13 +40,7 @@ void desenhaTexto(void *font, char *string)
 
 void GlCell::Draw()
 {
-  //glBegin(GL_LINE_LOOP);
-  //  glVertex2i(0, 0);
-  //  glVertex2i(0, 1);
-  //  glVertex2i(1, 1);
-  //  glVertex2i(1, 0);
-  //glEnd();
-
+  glColor3f(0, 0, 1);
   glLineWidth(2);
   glBegin(GL_LINES);
 
@@ -79,21 +73,4 @@ void GlCell::Draw()
   }
   
   glEnd();
-
-  //glRasterPos2f(0, 0);
-  //int i = cell->order;
-  //char buffer[33];
-  //_itoa_s(i, buffer, 10);
-
-  //desenhaTexto(GLUT_BITMAP_TIMES_ROMAN_24, &buffer[0]);
-
-  if (!cell->IsVisited())
-  {
-    glBegin(GL_LINES);
-      glVertex2i(0, 0);
-      glVertex2i(1, 1);
-      glVertex2i(1, 0);
-      glVertex2i(0, 1);
-    glEnd();
-  }
 }

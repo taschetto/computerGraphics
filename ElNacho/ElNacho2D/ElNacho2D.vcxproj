@@ -98,6 +98,7 @@
   <ItemGroup>
     <ClCompile Include="GlCell.cpp" />
     <ClCompile Include="GlNacho.cpp" />
+    <ClCompile Include="GlSpecialCell.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="Cell.cpp" />
@@ -108,6 +109,7 @@
     <ClInclude Include="Direction.h" />
     <ClInclude Include="GlCell.h" />
     <ClInclude Include="GlNacho.h" />
+    <ClInclude Include="GlSpecialCell.h" />
     <ClInclude Include="IDrawable.h" />
     <ClInclude Include="Nacho.h" />
     <ClInclude Include="OpenGL.h" />

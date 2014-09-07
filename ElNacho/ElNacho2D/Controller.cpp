@@ -2,6 +2,7 @@
 #include "IDrawable.h"
 
 #include "GlCell.h"
+#include "GlSpecialCell.h"
 #include "GlNacho.h"
 
 #include "Maze.h"
@@ -12,10 +13,8 @@
 
 Controller::Controller()
 {
-  size_t size = 6;
+  size_t size = 4;
   maze = new Maze(size, 2 * size);
-  maze->Generate();
-
   nacho = new Nacho(maze);
 }
 
@@ -69,6 +68,9 @@ void Controller::Display()
   {
     drawables.push_back(new GlCell(maze, cell));
   }
+
+  drawables.push_back(new GlSpecialCell(maze, maze->GetInitial()));
+  //drawables.push_back(new GlSpecialCell(maze, maze->At(maze->GetWidth()-1, maze->GetHeight()-1)));
 
   drawables.push_back(new GlNacho(maze, nacho));
 

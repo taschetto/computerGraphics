@@ -29,14 +29,15 @@ float GlNacho::GetTy()
 void GlNacho::Translate()
 {
   glTranslatef(GetTx(), GetTy(), 0.f);
+  
 }
 
 void GlNacho::Draw()
 {
-  glBegin(GL_QUADS);
-    glVertex2i(0, 0);
-    glVertex2i(0, 1);
-    glVertex2i(1, 1);
-    glVertex2i(1, 0);
+  glColor3f(1, 1, 0);
+  glBegin(GL_TRIANGLES);
+    glVertex2f(0.2f, 0.2f);
+    glVertex2f(0.5f, 0.8f);
+    glVertex2f(0.8f, 0.2f);
   glEnd();
 }

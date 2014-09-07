@@ -16,10 +16,6 @@ public:
   Cell();
   ~Cell();
 
-  void SetOrder(int o)
-  {
-    order = o;
-  }
   void SetY(size_t);
   void SetX(size_t);
   size_t GetY();

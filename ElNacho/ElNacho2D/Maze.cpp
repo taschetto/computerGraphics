@@ -1,7 +1,7 @@
 #include <algorithm>
-#include <chrono>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
-#include <random>
 #include <stack>
 #include "Maze.h"
 
@@ -10,6 +10,8 @@ using namespace std;
 Maze::Maze(size_t height, size_t width)
   : height(height)
   , width(width)
+  , initial(nullptr)
+  , goal(nullptr)
 {
   grid = new Cell*[height]();
   for (size_t y = 0; y < height; y++)
@@ -23,6 +25,8 @@ Maze::Maze(size_t height, size_t width)
       grid[y][x].SetX(x);
     }
   }
+
+  Generate();
 }
 
 Maze::~Maze()
@@ -48,13 +52,15 @@ void Maze::Generate()
   std::map<Direction, size_t> Dy = { { North, -1 }, { South, 1 }, { East, 0 }, { West, 0 } };
   std::map<Direction, Direction> Oposite = { { North, South }, { South, North }, { East, West }, { West, East } };
 
-  Cell* initial = &grid[rand() % height][rand() % width];
+  std::srand(std::time(0));
+  Cell* initial = &grid[std::rand() % height][std::rand() % width];
   initial->Visit();
-  int order = 1;
-  initial->SetOrder(order++);
+
+  this->initial = initial;
 
   stack<Cell*> cells;
   cells.push(initial);
+  
   while (cells.size() > 0)
   {
     Cell* cell = cells.top();
@@ -78,8 +84,6 @@ void Maze::Generate()
 
         grid[y][x].Carve(d);
         grid[ny][nx].Carve(Oposite[d]);
-
-        grid[ny][nx].SetOrder(order++);
 
         cells.push(&grid[ny][nx]);
 
@@ -124,4 +128,9 @@ void Maze::Dump()
       cout << endl;
     }
   }
+}
+
+Cell* Maze::GetInitial()
+{
+  return initial;
 }

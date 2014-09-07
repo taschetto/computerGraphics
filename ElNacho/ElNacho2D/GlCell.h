@@ -18,6 +18,6 @@ public:
 
   void Scale();
   void Translate();
-  void Draw();
+  virtual void Draw();
 };
 

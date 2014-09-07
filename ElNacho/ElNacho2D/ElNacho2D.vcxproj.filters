@@ -36,6 +36,9 @@
     <ClCompile Include="Nacho.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GlSpecialCell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Maze.h">
@@ -63,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Direction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GlSpecialCell.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
