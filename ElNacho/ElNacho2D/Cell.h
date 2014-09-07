@@ -3,7 +3,7 @@
 #include <set>
 #include "Direction.h"
 
-class MazeCell
+class Cell
 {
 private:
   size_t x;
@@ -13,8 +13,8 @@ private:
 
 public:
   int order;
-  MazeCell();
-  ~MazeCell();
+  Cell();
+  ~Cell();
 
   void SetOrder(int o)
   {

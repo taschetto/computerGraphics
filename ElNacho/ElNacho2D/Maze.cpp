@@ -3,7 +3,6 @@
 #include <iostream>
 #include <random>
 #include <stack>
-#include <string>
 #include "Maze.h"
 
 using namespace std;
@@ -12,9 +11,9 @@ Maze::Maze(size_t height, size_t width)
   : height(height)
   , width(width)
 {
-  grid = new MazeCell*[height]();
+  grid = new Cell*[height]();
   for (size_t y = 0; y < height; y++)
-    grid[y] = new MazeCell[width]();
+    grid[y] = new Cell[width]();
 
   for (size_t y = 0; y < height; y++)
   {
@@ -24,21 +23,6 @@ Maze::Maze(size_t height, size_t width)
       grid[y][x].SetX(x);
     }
   }
-
-  Dx[North] = 0;
-  Dx[South] = 0;
-  Dx[East] = 1;
-  Dx[West] = -1;
-
-  Dy[North] = -1;
-  Dy[South] = 1;
-  Dy[East] = 0;
-  Dy[West] = 0;
-
-  Oposite[North] = South;
-  Oposite[South] = North;
-  Oposite[East] = West;
-  Oposite[West] = East;
 }
 
 Maze::~Maze()
@@ -60,24 +44,26 @@ size_t Maze::GetHeight()
 
 void Maze::Generate()
 {
-  MazeCell* initial = &grid[rand() % height][rand() % width];
+  std::map<Direction, size_t> Dx = { { North, 0 }, { South, 0 }, { East, 1 }, { West, -1 } };
+  std::map<Direction, size_t> Dy = { { North, -1 }, { South, 1 }, { East, 0 }, { West, 0 } };
+  std::map<Direction, Direction> Oposite = { { North, South }, { South, North }, { East, West }, { West, East } };
+
+  Cell* initial = &grid[rand() % height][rand() % width];
   initial->Visit();
   int order = 1;
   initial->SetOrder(order++);
 
-  stack<MazeCell*> cells;
+  stack<Cell*> cells;
   cells.push(initial);
   while (cells.size() > 0)
   {
-    MazeCell* cell = cells.top();
+    Cell* cell = cells.top();
     
     size_t y = cell->GetY();
     size_t x = cell->GetX();
 
     std::vector<Direction> directions = { North, South, East, West };
-
-    unsigned seed = (unsigned)std::chrono::system_clock::now().time_since_epoch().count();
-    std::shuffle(directions.begin(), directions.end(), std::default_random_engine(seed));
+    std::random_shuffle(directions.begin(), directions.end());
 
     bool any = false;
     for (Direction d : directions)
@@ -104,9 +90,14 @@ void Maze::Generate()
   }
 }
 
-std::vector<MazeCell*> Maze::Cells()
+Cell* Maze::At(size_t x, size_t y)
 {
-  std::vector<MazeCell*> cells;
+  return &grid[y][x];
+}
+
+std::vector<Cell*> Maze::Cells()
+{
+  std::vector<Cell*> cells;
 
   for (size_t y = 0; y < height; y++)
   {

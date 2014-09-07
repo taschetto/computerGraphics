@@ -1,35 +1,61 @@
 #include <iostream>
-#include "LOpenGL.h"
-#include "Maze.h"
-#include "Renderer.h"
+#include "OpenGL.h"
+#include "Controller.h"
 
-void doRendering(void);
+namespace
+{
+  const int ScreenWidth = 1000;
+  const int ScreenHeight = 500;
+  const char* WindowTitle = "El Nacho: a game by Guilherme Taschetto";
 
-Renderer* renderer;
+  void doDisplay(void);
+  void doKeyboard(unsigned char, int, int);
+  void doSpecialFunc(int, int, int);
+
+  Controller* controller = nullptr;
+}
 
 int main(int argc, char* args[])
 {
-  glutInit(&argc, args);
-  glutInitContextVersion(3, 1);
+  ::glutInit(&argc, args);
+  ::glutInitContextVersion(3, 1);
 
-  glutInitDisplayMode(GLUT_DOUBLE);
-  glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-  glutCreateWindow("OpenGL");
+  ::glutInitDisplayMode(GLUT_DOUBLE);
+  ::glutInitWindowSize(::ScreenWidth, ::ScreenHeight);
+  ::glutCreateWindow(::WindowTitle);
 
-  renderer = new Renderer();
-  if (!renderer->InitGL())
+  controller = new(std::nothrow) Controller();
+  if (controller == nullptr)
   {
-    printf("Unable to initialize graphics library!\n");
+    std::cerr << "ElNacho error: Out of memory!" << std::endl;
     return 1;
   }
 
-  glutDisplayFunc(doRendering);
-  glutMainLoop();
+  if (!controller->InitGL())
+  {
+    std::cerr << "ElNacho error: Unable to initialize graphics library!" << std::endl;
+    return 1;
+  }
+
+  ::glutDisplayFunc(::doDisplay);
+  ::glutKeyboardFunc(::doKeyboard);
+  ::glutSpecialFunc(::doSpecialFunc);
+  ::glutMainLoop();
 
   return 0;
 }
 
-void doRendering(void)
+void ::doDisplay(void)
 {
-  renderer->Render();
+  controller->Display();
+}
+
+void ::doKeyboard(unsigned char key, int x, int y)
+{
+  controller->Keyboard(key, x, y);
+}
+
+void ::doSpecialFunc(int key, int x, int y)
+{
+  controller->SpecialFunc(key, x, y);
 }
