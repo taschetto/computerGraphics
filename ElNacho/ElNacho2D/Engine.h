@@ -2,6 +2,7 @@
 
 #include "Maze.h"
 #include "Nacho.h"
+#include "IDrawable.h"
 
 class Engine
 {
@@ -19,5 +20,7 @@ public:
   void Display();
   void Keyboard(unsigned char, int, int);
   void SpecialFunc(int, int, int);
+
+  void Draw(IDrawable*);
 };
 

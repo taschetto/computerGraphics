@@ -73,7 +73,7 @@ void Engine::Display()
 
   for (IDrawable* drawable : drawables)
   {
-    drawable->Render();
+    Draw(drawable);
   }
 
   for (IDrawable* drawable : drawables)
@@ -109,4 +109,13 @@ void Engine::SpecialFunc(int key, int, int)
   }
 
   glutPostRedisplay();
+}
+
+void Engine::Draw(IDrawable* drawable)
+{
+  glPushMatrix();
+  drawable->Scale();
+  drawable->Translate();
+  drawable->Draw();
+  glPopMatrix();
 }
