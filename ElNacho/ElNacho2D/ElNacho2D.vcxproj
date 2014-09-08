@@ -98,17 +98,20 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GlCell.cpp" />
     <ClCompile Include="GlNacho.cpp" />
     <ClCompile Include="GlSpecialCell.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="Cell.cpp" />
-    <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Nacho.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direction.h" />
+    <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="IGameState.h" />
     <ClInclude Include="GlCell.h" />
     <ClInclude Include="GlNacho.h" />
     <ClInclude Include="GlSpecialCell.h" />
@@ -117,7 +120,7 @@
     <ClInclude Include="OpenGL.h" />
     <ClInclude Include="Maze.h" />
     <ClInclude Include="Cell.h" />
-    <ClInclude Include="Engine.h" />
+    <ClInclude Include="PlayState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

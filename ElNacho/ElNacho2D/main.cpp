@@ -1,6 +1,7 @@
 #include <iostream>
 #include "OpenGL.h"
-#include "Engine.h"
+#include "GameEngine.h"
+#include "PlayState.h"
 
 namespace
 {
@@ -12,30 +13,20 @@ namespace
   void doKeyboard(unsigned char, int, int);
   void doSpecialFunc(int, int, int);
 
-  Engine* engine = nullptr;
+  GameEngine engine;
 }
 
-int main(int argc, char* args[])
+int main(int argc, char** argv)
 {
-  ::glutInit(&argc, args);
-  ::glutInitContextVersion(3, 1);
+  engine.Init(argc, argv, ::ScreenWidth, ::ScreenHeight, ::WindowTitle);
 
-  ::glutInitDisplayMode(GLUT_DOUBLE);
-  ::glutInitWindowSize(::ScreenWidth, ::ScreenHeight);
-  ::glutCreateWindow(::WindowTitle);
-
-  engine = new(std::nothrow) Engine();
-  if (engine == nullptr)
-  {
-    std::cerr << "ElNacho error: Out of memory!" << std::endl;
-    return 1;
-  }
-
-  if (!engine->InitGL())
+  if (!engine.InitGL())
   {
     std::cerr << "ElNacho error: Unable to initialize graphics library!" << std::endl;
     return 1;
   }
+
+  engine.ChangeState(PlayState::Instance());
 
   ::glutDisplayFunc(::doDisplay);
   ::glutKeyboardFunc(::doKeyboard);
@@ -47,15 +38,15 @@ int main(int argc, char* args[])
 
 void ::doDisplay(void)
 {
-  engine->Display();
+  engine.Draw();
 }
 
 void ::doKeyboard(unsigned char key, int x, int y)
 {
-  engine->Keyboard(key, x, y);
+  engine.Keyboard(key, x, y);
 }
 
 void ::doSpecialFunc(int key, int x, int y)
 {
-  engine->SpecialFunc(key, x, y);
+  engine.SpecialFunc(key, x, y);
 }

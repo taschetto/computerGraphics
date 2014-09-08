@@ -1,5 +1,5 @@
 #include <vector>
-#include "Engine.h"
+#include "PlayState.h"
 #include "GlCell.h"
 #include "GlSpecialCell.h"
 #include "GlNacho.h"
@@ -8,53 +8,31 @@
 #include "Nacho.h"
 #include "OpenGL.h"
 
-Engine::Engine()
+PlayState *PlayState::instance = 0;
+
+void PlayState::Init()
 {
   size_t size = 25;
   maze = new Maze(size, 2 * size);
   nacho = new Nacho(maze);
 }
 
-Engine::~Engine()
+void PlayState::Cleanup()
 {
   delete maze;
   delete nacho;
 }
 
-void Engine::InitRender()
+void PlayState::Pause()
 {
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-  float padding = 0.5;
-  gluOrtho2D(0 - padding, maze->GetWidth() + padding, 0 - padding, maze->GetHeight() + padding);
-  glPushMatrix();
 }
 
-bool Engine::InitGL()
+void PlayState::Resume()
 {
-  //Initialize Projection Matrix
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-
-  //Initialize Modelview Matrix
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-
-  //Initialize clear color
-  glClearColor(0.f, 0.f, 0.f, 1.f);
-
-  //Check for error
-  GLenum error = glGetError();
-  if (error != GL_NO_ERROR)
-  {
-    printf("Error initializing OpenGL! %s\n", gluErrorString(error));
-    return false;
-  }
-
-  return true;
 }
 
-void Engine::Display()
+
+void PlayState::Draw()
 {
   this->InitRender();
   glClearColor(0, 0, 0, 1);
@@ -73,7 +51,11 @@ void Engine::Display()
 
   for (IDrawable* drawable : drawables)
   {
-    Draw(drawable);
+    glPushMatrix();
+    drawable->Scale();
+    drawable->Translate();
+    drawable->Draw();
+    glPopMatrix();
   }
 
   for (IDrawable* drawable : drawables)
@@ -83,11 +65,11 @@ void Engine::Display()
   glutSwapBuffers();
 }
 
-void Engine::Keyboard(unsigned char, int, int)
+void PlayState::Keyboard(unsigned char, int, int)
 {
 }
 
-void Engine::SpecialFunc(int key, int, int)
+void PlayState::SpecialFunc(int key, int, int)
 {
   switch (key)
   {
@@ -111,11 +93,11 @@ void Engine::SpecialFunc(int key, int, int)
   glutPostRedisplay();
 }
 
-void Engine::Draw(IDrawable* drawable)
+void PlayState::InitRender()
 {
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+  float padding = 0.5;
+  gluOrtho2D(0 - padding, maze->GetWidth() + padding, 0 - padding, maze->GetHeight() + padding);
   glPushMatrix();
-  drawable->Scale();
-  drawable->Translate();
-  drawable->Draw();
-  glPopMatrix();
 }
