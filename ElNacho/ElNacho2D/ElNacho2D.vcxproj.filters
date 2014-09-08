@@ -21,9 +21,6 @@
     <ClCompile Include="Maze.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controller.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GlCell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,15 +36,15 @@
     <ClCompile Include="GlSpecialCell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Maze.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OpenGL.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GlCell.h">
@@ -69,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GlSpecialCell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

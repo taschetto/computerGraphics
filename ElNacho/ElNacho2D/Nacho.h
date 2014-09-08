@@ -9,6 +9,7 @@ private:
   Maze* maze;
   size_t x;
   size_t y;
+  float radius;
 
 public:
   Nacho(Maze*);
@@ -18,5 +19,9 @@ public:
   size_t GetY();
 
   void Walk(Direction);
-};
 
+  float GetRadius()
+  {
+    return radius;
+  }
+};

@@ -102,7 +102,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="Cell.cpp" />
-    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Nacho.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -115,7 +115,7 @@
     <ClInclude Include="OpenGL.h" />
     <ClInclude Include="Maze.h" />
     <ClInclude Include="Cell.h" />
-    <ClInclude Include="Controller.h" />
+    <ClInclude Include="Engine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -9,6 +9,7 @@ private:
   Nacho* nacho;
   float GetTx();
   float GetTy();
+  void DrawCircle(float, float, float, int);
 
 public:
   GlNacho(Maze*, Nacho*);

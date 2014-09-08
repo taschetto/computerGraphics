@@ -1,7 +1,9 @@
 #include "Cell.h"
 
 Cell::Cell()
-: visited(false), order(0)
+  : x(0)
+  , y(0)
+  , visited(false)
 {
   walls.insert(North);
   walls.insert(South);
@@ -13,14 +15,19 @@ Cell::~Cell()
 {
 }
 
+void Cell::SetX(size_t nx)
+{
+  x = nx;
+}
+
 void Cell::SetY(size_t ny)
 {
   y = ny;
 }
 
-void Cell::SetX(size_t nx)
+size_t Cell::GetX()
 {
-  x = nx;
+  return x;
 }
 
 size_t Cell::GetY()
@@ -28,9 +35,9 @@ size_t Cell::GetY()
   return y;
 }
 
-size_t Cell::GetX()
+std::set<Direction> Cell::GetWalls()
 {
-  return x;
+  return walls;
 }
 
 bool Cell::IsVisited()
@@ -46,11 +53,6 @@ void Cell::Visit()
 void Cell::Carve(Direction direction)
 {
   walls.erase(direction);
-}
-
-std::set<Direction> Cell::GetWalls()
-{
-  return walls;
 }
 
 bool Cell::HasWall(Direction direction)

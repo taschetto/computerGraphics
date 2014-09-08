@@ -11,9 +11,9 @@ public:
   void Render()
   {
     glPushMatrix();
-    this->Scale();
-    this->Translate();
-    this->Draw();
+    Scale();
+    Translate();
+    Draw();
     glPopMatrix();
   }
 };

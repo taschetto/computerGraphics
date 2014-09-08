@@ -1,6 +1,6 @@
 #include <iostream>
 #include "OpenGL.h"
-#include "Controller.h"
+#include "Engine.h"
 
 namespace
 {
@@ -12,7 +12,7 @@ namespace
   void doKeyboard(unsigned char, int, int);
   void doSpecialFunc(int, int, int);
 
-  Controller* controller = nullptr;
+  Engine* engine = nullptr;
 }
 
 int main(int argc, char* args[])
@@ -24,14 +24,14 @@ int main(int argc, char* args[])
   ::glutInitWindowSize(::ScreenWidth, ::ScreenHeight);
   ::glutCreateWindow(::WindowTitle);
 
-  controller = new(std::nothrow) Controller();
-  if (controller == nullptr)
+  engine = new(std::nothrow) Engine();
+  if (engine == nullptr)
   {
     std::cerr << "ElNacho error: Out of memory!" << std::endl;
     return 1;
   }
 
-  if (!controller->InitGL())
+  if (!engine->InitGL())
   {
     std::cerr << "ElNacho error: Unable to initialize graphics library!" << std::endl;
     return 1;
@@ -47,15 +47,15 @@ int main(int argc, char* args[])
 
 void ::doDisplay(void)
 {
-  controller->Display();
+  engine->Display();
 }
 
 void ::doKeyboard(unsigned char key, int x, int y)
 {
-  controller->Keyboard(key, x, y);
+  engine->Keyboard(key, x, y);
 }
 
 void ::doSpecialFunc(int key, int x, int y)
 {
-  controller->SpecialFunc(key, x, y);
+  engine->SpecialFunc(key, x, y);
 }

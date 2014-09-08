@@ -1,9 +1,8 @@
 #pragma once
 
-#include <map>
 #include <vector>
-#include "Direction.h"
 #include "Cell.h"
+#include "Direction.h"
 
 class Maze
 {
@@ -11,10 +10,8 @@ private:
   size_t width;
   size_t height;
   Cell** grid;
-
   Cell* initial;
   Cell* goal;
-
   std::vector<Direction> Directions(Cell cell);
 
 public:
@@ -23,11 +20,11 @@ public:
 
   size_t GetWidth();
   size_t GetHeight();
-  void Generate();
-  Cell* At(size_t x, size_t y);
   std::vector<Cell*> Cells();
+  Cell* At(size_t x, size_t y);
   Cell* GetInitial();
-
-  void Dump();
+  Cell* GetGoal();
+  
+  void Generate();
 };
 

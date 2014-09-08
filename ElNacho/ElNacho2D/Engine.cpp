@@ -1,29 +1,36 @@
-#include "Controller.h"
-#include "IDrawable.h"
-
+#include <vector>
+#include "Engine.h"
 #include "GlCell.h"
 #include "GlSpecialCell.h"
 #include "GlNacho.h"
-
+#include "IDrawable.h"
 #include "Maze.h"
 #include "Nacho.h"
-
 #include "OpenGL.h"
-#include <vector>
 
-Controller::Controller()
+Engine::Engine()
 {
-  size_t size = 4;
+  size_t size = 25;
   maze = new Maze(size, 2 * size);
   nacho = new Nacho(maze);
 }
 
-Controller::~Controller()
+Engine::~Engine()
 {
   delete maze;
+  delete nacho;
 }
 
-bool Controller::InitGL()
+void Engine::InitRender()
+{
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+  float padding = 0.5;
+  gluOrtho2D(0 - padding, maze->GetWidth() + padding, 0 - padding, maze->GetHeight() + padding);
+  glPushMatrix();
+}
+
+bool Engine::InitGL()
 {
   //Initialize Projection Matrix
   glMatrixMode(GL_PROJECTION);
@@ -47,16 +54,7 @@ bool Controller::InitGL()
   return true;
 }
 
-void Controller::InitRender()
-{
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-  float padding = 0.5;
-  gluOrtho2D(0 - padding, maze->GetWidth() + padding, 0 - padding, maze->GetHeight() + padding);
-  glPushMatrix();
-}
-
-void Controller::Display()
+void Engine::Display()
 {
   this->InitRender();
   glClearColor(0, 0, 0, 1);
@@ -70,8 +68,7 @@ void Controller::Display()
   }
 
   drawables.push_back(new GlSpecialCell(maze, maze->GetInitial()));
-  //drawables.push_back(new GlSpecialCell(maze, maze->At(maze->GetWidth()-1, maze->GetHeight()-1)));
-
+  drawables.push_back(new GlSpecialCell(maze, maze->GetGoal()));
   drawables.push_back(new GlNacho(maze, nacho));
 
   for (IDrawable* drawable : drawables)
@@ -81,20 +78,17 @@ void Controller::Display()
 
   for (IDrawable* drawable : drawables)
     delete drawable;
-  
   drawables.clear();
+  
   glutSwapBuffers();
-  //glFlush();
 }
 
-void Controller::Keyboard(unsigned char, int, int)
+void Engine::Keyboard(unsigned char, int, int)
 {
 }
 
-void Controller::SpecialFunc(int key, int, int)
+void Engine::SpecialFunc(int key, int, int)
 {
-  size_t nx = 0, ny = 0;
-  bool setX = false, setY = false;
   switch (key)
   {
   case GLUT_KEY_UP:

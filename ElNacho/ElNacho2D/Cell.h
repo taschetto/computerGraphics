@@ -12,14 +12,13 @@ private:
   bool visited;
 
 public:
-  int order;
   Cell();
   ~Cell();
 
-  void SetY(size_t);
   void SetX(size_t);
-  size_t GetY();
+  void SetY(size_t);
   size_t GetX();
+  size_t GetY();
   std::set<Direction> GetWalls();
 
   bool IsVisited();

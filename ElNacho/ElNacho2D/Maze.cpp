@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <map>
 #include <stack>
 #include "Maze.h"
 
@@ -46,13 +47,43 @@ size_t Maze::GetHeight()
   return height;
 }
 
+std::vector<Cell*> Maze::Cells()
+{
+  std::vector<Cell*> cells;
+
+  for (size_t y = 0; y < height; y++)
+  {
+    for (size_t x = 0; x < width; x++)
+    {
+      cells.push_back(&grid[y][x]);
+    }
+  }
+
+  return cells;
+}
+
+Cell* Maze::At(size_t x, size_t y)
+{
+  return &grid[y][x];
+}
+
+Cell* Maze::GetInitial()
+{
+  return initial;
+}
+
+Cell* Maze::GetGoal()
+{
+  return goal;
+}
+
 void Maze::Generate()
 {
   std::map<Direction, size_t> Dx = { { North, 0 }, { South, 0 }, { East, 1 }, { West, -1 } };
   std::map<Direction, size_t> Dy = { { North, -1 }, { South, 1 }, { East, 0 }, { West, 0 } };
   std::map<Direction, Direction> Oposite = { { North, South }, { South, North }, { East, West }, { West, East } };
 
-  std::srand(std::time(0));
+  std::srand((unsigned int)std::time(0));
   Cell* initial = &grid[std::rand() % height][std::rand() % width];
   initial->Visit();
 
@@ -87,50 +118,11 @@ void Maze::Generate()
 
         cells.push(&grid[ny][nx]);
 
+        this->goal = &grid[ny][nx];
+
         break;
       }
     }
     if (!any) cells.pop();
   }
-}
-
-Cell* Maze::At(size_t x, size_t y)
-{
-  return &grid[y][x];
-}
-
-std::vector<Cell*> Maze::Cells()
-{
-  std::vector<Cell*> cells;
-
-  for (size_t y = 0; y < height; y++)
-  {
-    for (size_t x = 0; x < width; x++)
-    {
-      cells.push_back(&grid[y][x]);
-    }
-  }
-
-  return cells;
-}
-
-void Maze::Dump()
-{
-  for (size_t y = 0; y < height; y++)
-  {
-    for (size_t x = 0; x < width; x++)
-    {
-      cout << x << "," << y << " ... ";
-      if (grid[y][x].HasWall(North)) cout << 'N';
-      if (grid[y][x].HasWall(South)) cout << 'S';
-      if (grid[y][x].HasWall(West)) cout << 'W';
-      if (grid[y][x].HasWall(East)) cout << 'E';
-      cout << endl;
-    }
-  }
-}
-
-Cell* Maze::GetInitial()
-{
-  return initial;
 }

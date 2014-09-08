@@ -3,7 +3,7 @@
 #include "Maze.h"
 #include "Nacho.h"
 
-class Controller
+class Engine
 {
 private:
   Maze* maze;
@@ -12,8 +12,8 @@ private:
   void InitRender();
 
 public:
-  Controller();
-  ~Controller();
+  Engine();
+  ~Engine();
 
   bool InitGL();
   void Display();

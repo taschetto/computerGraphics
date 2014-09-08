@@ -1,3 +1,4 @@
+#include <map>
 #include "Nacho.h"
 
 Nacho::Nacho(Maze* maze)
@@ -5,6 +6,7 @@ Nacho::Nacho(Maze* maze)
 {
   x = maze->GetInitial()->GetX();
   y = maze->GetInitial()->GetY();
+  radius = (float)maze->GetWidth() / 2.f;
 }
 
 Nacho::~Nacho()
@@ -33,5 +35,8 @@ void Nacho::Walk(Direction direction)
   {
     x += Dx[direction];
     y += Dy[direction];
+
+    if (radius > 1.f)
+      radius -= 0.1f;
   }
 }

@@ -32,12 +32,6 @@ void GlCell::Translate()
   glTranslatef(GetTx(), GetTy(), 0.0f);
 }
 
-void desenhaTexto(void *font, char *string)
-{
-  while (*string)
-    glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *string++);
-}
-
 void GlCell::Draw()
 {
   glColor3f(0, 0, 1);
@@ -46,7 +40,7 @@ void GlCell::Draw()
 
   if (cell->HasWall(North))
   {
-    glColor3f(0., 0., 1.);
+    //glColor3f(0., 0., 1.);
     glVertex2i(0, 1);
     glVertex2i(1, 1);
   }

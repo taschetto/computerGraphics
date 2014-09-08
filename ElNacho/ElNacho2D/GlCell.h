@@ -8,7 +8,6 @@ class GlCell : public IDrawable
 private:
   Maze* maze;
   Cell* cell;
-
   float GetTx();
   float GetTy();
 
