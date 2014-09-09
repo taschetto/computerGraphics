@@ -12,7 +12,7 @@ PlayState *PlayState::instance = 0;
 
 void PlayState::Init()
 {
-  size_t size = 25;
+  size_t size = 8;
   maze = new Maze(size, 2 * size);
   nacho = new Nacho(maze);
 }
@@ -31,10 +31,15 @@ void PlayState::Resume()
 {
 }
 
-
 void PlayState::Draw()
 {
-  this->InitRender();
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+
+  float padding = 0.5;
+  gluOrtho2D(0 - padding, maze->GetWidth() + padding, 0 - padding, maze->GetHeight() + padding);
+  glPushMatrix();
+
   glClearColor(0, 0, 0, 1);
   glClear(GL_COLOR_BUFFER_BIT);
 
@@ -65,11 +70,11 @@ void PlayState::Draw()
   glutSwapBuffers();
 }
 
-void PlayState::Keyboard(unsigned char, int, int)
+void PlayState::Keyboard(GameEngine*, unsigned char, int, int)
 {
 }
 
-void PlayState::SpecialFunc(int key, int, int)
+void PlayState::SpecialFunc(GameEngine*, int key, int, int)
 {
   switch (key)
   {
@@ -91,13 +96,4 @@ void PlayState::SpecialFunc(int key, int, int)
   }
 
   glutPostRedisplay();
-}
-
-void PlayState::InitRender()
-{
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-  float padding = 0.5;
-  gluOrtho2D(0 - padding, maze->GetWidth() + padding, 0 - padding, maze->GetHeight() + padding);
-  glPushMatrix();
 }

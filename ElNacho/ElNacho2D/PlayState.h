@@ -1,22 +1,20 @@
 #pragma once
 
-#include "IGameState.h"
+#include "GameEngine.h"
+#include "GameState.h"
 #include "Maze.h"
 #include "Nacho.h"
 #include "IDrawable.h"
 
-class PlayState : public IGameState
+class PlayState : public GameState
 {
 private:
-  PlayState()
-  {}
+  PlayState() {}
 
   static PlayState* instance;
   
   Maze* maze;
   Nacho* nacho;
-
-  void InitRender();
 
 public:
   void Init();
@@ -26,8 +24,8 @@ public:
   void Resume();
 
   void Draw();
-  void Keyboard(unsigned char, int, int);
-  void SpecialFunc(int, int, int);
+  void Keyboard(GameEngine*, unsigned char, int, int);
+  void SpecialFunc(GameEngine*, int, int, int);
 
   static PlayState* Instance()
   {

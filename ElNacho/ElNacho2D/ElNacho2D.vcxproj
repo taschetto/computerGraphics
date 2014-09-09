@@ -84,14 +84,12 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>
-      </SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <EntryPointSymbol>
-      </EntryPointSymbol>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /d /y "$(ProjectDir)..\..\freeglut\bin\freeglut.dll" "$(OutDir)"</Command>
@@ -102,6 +100,7 @@
     <ClCompile Include="GlCell.cpp" />
     <ClCompile Include="GlNacho.cpp" />
     <ClCompile Include="GlSpecialCell.cpp" />
+    <ClCompile Include="InitialState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="Cell.cpp" />
@@ -111,11 +110,12 @@
   <ItemGroup>
     <ClInclude Include="Direction.h" />
     <ClInclude Include="GameEngine.h" />
-    <ClInclude Include="IGameState.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="GlCell.h" />
     <ClInclude Include="GlNacho.h" />
     <ClInclude Include="GlSpecialCell.h" />
     <ClInclude Include="IDrawable.h" />
+    <ClInclude Include="InitialState.h" />
     <ClInclude Include="Nacho.h" />
     <ClInclude Include="OpenGL.h" />
     <ClInclude Include="Maze.h" />

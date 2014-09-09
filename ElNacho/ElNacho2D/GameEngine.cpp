@@ -1,5 +1,5 @@
 #include "GameEngine.h"
-#include "IGameState.h"
+#include "GameState.h"
 #include "OpenGL.h"
 
 GameEngine::GameEngine()
@@ -15,6 +15,8 @@ void GameEngine::Init(int argc, char** argv, const size_t screenWidth, const siz
   ::glutInit(&argc, argv);
   ::glutInitContextVersion(3, 1);
 
+  glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_DST_ALPHA);
+
   ::glutInitDisplayMode(GLUT_DOUBLE);
   ::glutInitWindowSize(screenWidth, screenHeight);
   ::glutCreateWindow(windowTitle);
@@ -29,6 +31,9 @@ bool GameEngine::InitGL()
   //Initialize Modelview Matrix
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
+
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glEnable(GL_BLEND);
 
   //Initialize clear color
   glClearColor(0.f, 0.f, 0.f, 1.f);
@@ -52,7 +57,7 @@ void GameEngine::Cleanup()
   }
 }
 
-void GameEngine::ChangeState(IGameState* state)
+void GameEngine::ChangeState(GameState* state)
 {
   if (!states.empty()) {
     states.back()->Cleanup();
@@ -63,7 +68,7 @@ void GameEngine::ChangeState(IGameState* state)
   states.back()->Init();
 }
 
-void GameEngine::PushState(IGameState* state)
+void GameEngine::PushState(GameState* state)
 {
   if (!states.empty()) {
     states.back()->Pause();
@@ -93,10 +98,10 @@ void GameEngine::Draw()
 
 void GameEngine::Keyboard(unsigned char key, int x, int y)
 {
-  states.back()->Keyboard(key, x, y);
+  states.back()->Keyboard(this, key, x, y);
 }
 
 void GameEngine::SpecialFunc(int key, int x, int y)
 {
-  states.back()->SpecialFunc(key, x, y);
+  states.back()->SpecialFunc(this, key, x, y);
 }

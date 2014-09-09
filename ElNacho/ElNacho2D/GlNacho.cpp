@@ -24,14 +24,19 @@ float GlNacho::GetTy()
 
 void GlNacho::DrawCircle(float centerX, float centerY, float radius, int segments)
 {
-  glBegin(GL_LINE_LOOP);
-  for (int ii = 0; ii < segments; ii++)
+  glBegin(GL_TRIANGLE_FAN);
+
+  glColor4f(1, 1, 0, 0);
+  glVertex2f(centerX, centerY);
+
+  for (int i = 0; i <= segments; i++)
   {
-    float theta = 2.0f * 3.1415926f * float(ii) / float(segments);//get the current angle
+    float theta = 2.0f * 3.1415926f * float(i) / float(segments); //get the current angle
 
     float x = radius * cosf(theta);//calculate the x component
     float y = radius * sinf(theta);//calculate the y component
 
+    glColor4f(1, 1, 0, 0.5);
     glVertex2f(x + centerX, y + centerY);//output vertex
 
   }
@@ -57,5 +62,5 @@ void GlNacho::Draw()
     glVertex2f(0.8f, 0.2f);
   glEnd();
 
-  DrawCircle(0.5, 0.5, nacho->GetRadius(), 35);
+  DrawCircle(0.5, 0.5, nacho->GetRadius(), 32);
 }

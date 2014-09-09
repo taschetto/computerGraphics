@@ -2,7 +2,7 @@
 
 #include <vector>
 
-class IGameState;
+class GameState;
 
 class GameEngine
 {
@@ -14,8 +14,8 @@ public:
   bool InitGL();
   void Cleanup();
 
-  void ChangeState(IGameState* state);
-  void PushState(IGameState* state);
+  void ChangeState(GameState* state);
+  void PushState(GameState* state);
   void PopState();
 
   void Draw();
@@ -26,7 +26,7 @@ public:
   //  void Quit() { m_running = false; }
   //
 private:
-  std::vector<IGameState*> states;
+  std::vector<GameState*> states;
 
   //  bool m_running;
 };

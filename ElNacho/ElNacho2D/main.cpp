@@ -1,6 +1,7 @@
 #include <iostream>
 #include "OpenGL.h"
 #include "GameEngine.h"
+#include "InitialState.h"
 #include "PlayState.h"
 
 namespace
