@@ -2,7 +2,6 @@
 #include "OpenGL.h"
 #include "GameEngine.h"
 #include "InitialState.h"
-#include "PlayState.h"
 
 namespace
 {
@@ -27,7 +26,7 @@ int main(int argc, char** argv)
     return 1;
   }
 
-  engine.ChangeState(PlayState::Instance());
+  engine.ChangeState(InitialState::Instance());
 
   ::glutDisplayFunc(::doDisplay);
   ::glutKeyboardFunc(::doKeyboard);

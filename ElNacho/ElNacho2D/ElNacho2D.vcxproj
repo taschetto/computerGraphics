@@ -98,22 +98,27 @@
   <ItemGroup>
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GlCell.cpp" />
+    <ClCompile Include="GlDarkness.cpp" />
+    <ClCompile Include="GlGoal.cpp" />
     <ClCompile Include="GlNacho.cpp" />
-    <ClCompile Include="GlSpecialCell.cpp" />
+    <ClCompile Include="GlInitial.cpp" />
     <ClCompile Include="InitialState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Nacho.cpp" />
+    <ClCompile Include="WinState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direction.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GlCell.h" />
+    <ClInclude Include="GlDarkness.h" />
+    <ClInclude Include="GlGoal.h" />
     <ClInclude Include="GlNacho.h" />
-    <ClInclude Include="GlSpecialCell.h" />
+    <ClInclude Include="GlInitial.h" />
     <ClInclude Include="IDrawable.h" />
     <ClInclude Include="InitialState.h" />
     <ClInclude Include="Nacho.h" />
@@ -121,6 +126,7 @@
     <ClInclude Include="Maze.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="PlayState.h" />
+    <ClInclude Include="WinState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -36,7 +36,10 @@ void Nacho::Walk(Direction direction)
     x += Dx[direction];
     y += Dy[direction];
 
-    if (radius > 1.f)
-      radius -= 0.1f;
+    if (radius > 2.f)
+    {
+      float step = .1f;
+      radius -= step;
+    }
   }
 }

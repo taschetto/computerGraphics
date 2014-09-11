@@ -90,6 +90,7 @@ void GameEngine::PopState()
 void GameEngine::Draw()
 {
   states.back()->Draw();
+  states.back()->HandleEvents(this);
   
 }
 

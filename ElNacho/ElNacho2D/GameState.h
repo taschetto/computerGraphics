@@ -11,6 +11,7 @@ public:
   virtual void Pause() = 0;
   virtual void Resume() = 0;
 
+  virtual void HandleEvents(GameEngine*) = 0;
   virtual void Draw() = 0;
   virtual void Keyboard(GameEngine*, unsigned char, int, int) = 0;
   virtual void SpecialFunc(GameEngine*, int, int, int) = 0;

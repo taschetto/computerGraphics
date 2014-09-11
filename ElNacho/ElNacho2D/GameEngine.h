@@ -22,12 +22,7 @@ public:
   void Keyboard(unsigned char, int, int);
   void SpecialFunc(int, int, int);
 
-  //  bool Running() { return m_running; }
-  //  void Quit() { m_running = false; }
-  //
 private:
   std::vector<GameState*> states;
-
-  //  bool m_running;
 };
 

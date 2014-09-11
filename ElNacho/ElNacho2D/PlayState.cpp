@@ -1,18 +1,21 @@
 #include <vector>
 #include "PlayState.h"
 #include "GlCell.h"
-#include "GlSpecialCell.h"
+#include "GlInitial.h"
+#include "GlDarkness.h"
+#include "GlGoal.h"
 #include "GlNacho.h"
 #include "IDrawable.h"
 #include "Maze.h"
 #include "Nacho.h"
 #include "OpenGL.h"
+#include "WinState.h"
 
 PlayState *PlayState::instance = 0;
 
 void PlayState::Init()
 {
-  size_t size = 8;
+  size_t size = level + 2;
   maze = new Maze(size, 2 * size);
   nacho = new Nacho(maze);
 }
@@ -31,13 +34,33 @@ void PlayState::Resume()
 {
 }
 
+void PlayState::HandleEvents(GameEngine* engine)
+{
+  Cell* goal = maze->GetGoal();
+
+  if (nacho->GetX() == goal->GetX() && nacho->GetY() == goal->GetY())
+  {
+    Cleanup();
+    level++;
+    Init();
+
+    engine->ChangeState(WinState::Instance());
+    ::glutPostRedisplay();
+  }
+}
+
 void PlayState::Draw()
 {
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
   float padding = 0.5;
-  gluOrtho2D(0 - padding, maze->GetWidth() + padding, 0 - padding, maze->GetHeight() + padding);
+  float left = 0 - padding;
+  float right = maze->GetWidth() + padding;
+  float bottom = 0 - padding;
+  float top = maze->GetHeight() + padding;
+
+  gluOrtho2D(left, right, bottom, top);
   glPushMatrix();
 
   glClearColor(0, 0, 0, 1);
@@ -50,9 +73,10 @@ void PlayState::Draw()
     drawables.push_back(new GlCell(maze, cell));
   }
 
-  drawables.push_back(new GlSpecialCell(maze, maze->GetInitial()));
-  drawables.push_back(new GlSpecialCell(maze, maze->GetGoal()));
+  drawables.push_back(new GlInitial(maze, maze->GetInitial()));
+  drawables.push_back(new GlGoal(maze, maze->GetGoal()));
   drawables.push_back(new GlNacho(maze, nacho));
+  drawables.push_back(new GlDarkness(nacho, left, right, bottom, top));
 
   for (IDrawable* drawable : drawables)
   {

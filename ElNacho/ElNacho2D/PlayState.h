@@ -13,6 +13,7 @@ private:
 
   static PlayState* instance;
   
+  size_t level = 6;
   Maze* maze;
   Nacho* nacho;
 
@@ -23,6 +24,7 @@ public:
   void Pause();
   void Resume();
 
+  void HandleEvents(GameEngine*);
   void Draw();
   void Keyboard(GameEngine*, unsigned char, int, int);
   void SpecialFunc(GameEngine*, int, int, int);

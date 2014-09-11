@@ -2,8 +2,13 @@
 
 #include "GameState.h"
 
-class InitialState : public GameState
+class WinState : public GameState
 {
+private:
+  WinState() {}
+
+  static WinState* instance;
+
 public:
   void Init();
   void Cleanup();
@@ -16,17 +21,12 @@ public:
   void Keyboard(GameEngine*, unsigned char, int, int);
   void SpecialFunc(GameEngine*, int, int, int);
 
-  static InitialState* Instance()
+  static WinState* Instance()
   {
     if (instance == nullptr)
-      instance = new InitialState();
+      instance = new WinState();
 
     return instance;
   }
-
-private:
-  InitialState() {}
-
-  static InitialState* instance;
 };
 

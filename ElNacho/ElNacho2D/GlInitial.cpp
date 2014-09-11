@@ -1,18 +1,18 @@
-#include "GlSpecialCell.h"
+#include "GlInitial.h"
 
 
-GlSpecialCell::GlSpecialCell(Maze* maze, Cell* cell)
+GlInitial::GlInitial(Maze* maze, Cell* cell)
 : GlCell(maze, cell)
 {
 }
 
-GlSpecialCell::~GlSpecialCell()
+GlInitial::~GlInitial()
 {
 }
 
-void GlSpecialCell::Draw()
+void GlInitial::Draw()
 {
-  glColor3f(1, 0, 0);
+  glColor3f(0, 0, 1);
   glLineWidth(2);
   glBegin(GL_QUADS);
     glVertex2f(0.2f, 0.2f);
