@@ -14,9 +14,6 @@ void GameEngine::Init(int argc, char** argv, const size_t screenWidth, const siz
 {
   ::glutInit(&argc, argv);
   ::glutInitContextVersion(3, 1);
-
-  glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_DST_ALPHA);
-
   ::glutInitDisplayMode(GLUT_DOUBLE);
   ::glutInitWindowSize(screenWidth, screenHeight);
   ::glutCreateWindow(windowTitle);

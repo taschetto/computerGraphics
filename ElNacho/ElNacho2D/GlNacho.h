@@ -9,6 +9,7 @@ private:
   Nacho* nacho;
   float GetTx();
   float GetTy();
+  void DrawArc(float, float, float, float, float, int);
   void DrawCircle(float, float, float, int);
 
 public:
