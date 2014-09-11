@@ -2,7 +2,6 @@
 #include "PlayState.h"
 #include "GlCell.h"
 #include "GlInitial.h"
-#include "GlDarkness.h"
 #include "GlGoal.h"
 #include "GlNacho.h"
 #include "IDrawable.h"
@@ -55,12 +54,12 @@ void PlayState::Draw()
   glLoadIdentity();
 
   float padding = 0.5;
-  float left = 0 - padding;
-  float right = maze->GetWidth() + padding;
-  float bottom = 0 - padding;
-  float top = maze->GetHeight() + padding;
+  float left = 0;
+  float right = (float)maze->GetWidth();
+  float bottom = 0;
+  float top = (float)maze->GetHeight();
 
-  gluOrtho2D(left, right, bottom, top);
+  gluOrtho2D(left - padding, right + padding, bottom - padding, top + padding);
   glPushMatrix();
 
   glClearColor(0, 0, 0, 1);
@@ -75,8 +74,7 @@ void PlayState::Draw()
 
   drawables.push_back(new GlInitial(maze, maze->GetInitial()));
   drawables.push_back(new GlGoal(maze, maze->GetGoal()));
-  drawables.push_back(new GlNacho(maze, nacho));
-  drawables.push_back(new GlDarkness(nacho, left, right, bottom, top));
+  drawables.push_back(new GlNacho(maze, nacho, left, right, bottom, top));
 
   for (IDrawable* drawable : drawables)
   {

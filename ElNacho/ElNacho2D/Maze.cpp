@@ -117,12 +117,15 @@ void Maze::Generate()
         grid[ny][nx].Carve(Oposite[d]);
 
         cells.push(&grid[ny][nx]);
-
-        this->goal = &grid[ny][nx];
-
         break;
       }
     }
     if (!any) cells.pop();
+  }
+
+  for (;;)
+  {
+    this->goal = &grid[std::rand() % height][std::rand() % width];
+    if (goal != initial) break;
   }
 }

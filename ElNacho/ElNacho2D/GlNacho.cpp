@@ -4,7 +4,7 @@
 
 #include <vector>
 
-GlNacho::GlNacho(Maze* maze, Nacho* nacho)
+GlNacho::GlNacho(Maze* maze, Nacho* nacho, float left, float right, float bottom, float top)
 : maze(maze)
 , nacho(nacho)
 {
@@ -53,5 +53,37 @@ void GlNacho::Draw()
     glVertex2f(centerX + radius, centerY - radius); // v3
     glVertex2f(centerX - radius, centerY - radius); // v4
     glVertex2f(centerX - radius, centerY + radius); // v1
+  glEnd();
+
+  glColor4f(0, 0, 0, 1);
+  glBegin(GL_QUADS);
+  glVertex2f(centerX + radius, -1.f*(float)maze->GetHeight());
+  glVertex2f(centerX + radius, (float)maze->GetHeight());
+  glVertex2f((float)maze->GetWidth(), (float)maze->GetHeight());
+  glVertex2f((float)maze->GetWidth(), -1.f*(float)maze->GetHeight());
+  glEnd();
+
+  glColor4f(0, 0, 0, 1);
+  glBegin(GL_QUADS);
+  glVertex2f(centerX - radius, -1.f*(float)maze->GetHeight() - 1);
+  glVertex2f(centerX - radius, (float)maze->GetHeight() + 1);
+  glVertex2f(-1.f*(float)maze->GetWidth(), (float)maze->GetHeight() + 1);
+  glVertex2f(-1.f*(float)maze->GetWidth(), -1.f*(float)maze->GetHeight() - 1);
+  glEnd();
+
+  glColor4f(0, 0, 0, 1);
+  glBegin(GL_QUADS);
+  glVertex2f(-1.f*(float)maze->GetWidth() - 1, centerY + radius);
+  glVertex2f(-1.f*(float)maze->GetWidth() - 1, (float)maze->GetHeight() + 1);
+  glVertex2f((float)maze->GetWidth() + 1, (float)maze->GetHeight() + 1);
+  glVertex2f((float)maze->GetWidth() + 1, centerY + radius);
+  glEnd();
+
+  glColor4f(0, 0, 0, 1);
+  glBegin(GL_QUADS);
+  glVertex2f(-1.f*(float)maze->GetWidth() - 1, centerY - radius);
+  glVertex2f(-1.f*(float)maze->GetWidth() - 1, -1.f*(float)maze->GetHeight() - 1);
+  glVertex2f((float)maze->GetWidth() + 1, -1.f*(float)maze->GetHeight() - 1);
+  glVertex2f((float)maze->GetWidth() + 1, centerY - radius);
   glEnd();
 }

@@ -51,9 +51,6 @@
     <ClCompile Include="GlInitial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GlDarkness.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Maze.h">
@@ -99,9 +96,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GlInitial.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GlDarkness.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
