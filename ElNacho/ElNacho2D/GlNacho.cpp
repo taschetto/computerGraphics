@@ -14,14 +14,14 @@ GlNacho::~GlNacho()
 {
 }
 
-float GlNacho::GetTx()
+float GlNacho::GetTx(size_t x)
 {
-  return (float)nacho->GetX();
+  return (float)x;
 }
 
-float GlNacho::GetTy()
+float GlNacho::GetTy(size_t y)
 {
-  return maze->GetHeight() - (float)nacho->GetY() - 1;
+  return maze->GetHeight() - (float)y - 1;
 }
 
 void GlNacho::Scale()
@@ -30,7 +30,24 @@ void GlNacho::Scale()
 
 void GlNacho::Translate()
 {
-  glTranslatef(GetTx(), GetTy(), 0.f);
+  ::glTranslatef(GetTx(nacho->GetX()), GetTy(nacho->GetY()), 0);
+
+  //float startX = (float)nacho->GetOldX();
+  //float startY = (float)nacho->GetOldY();
+  //
+  //float endX = (float)nacho->GetX();
+  //float endY = (float)nacho->GetY();
+
+  //if (startX != endX)
+  //{
+  //  float stepX = (endX - startX) / 10;
+  //  float stepY = (endY - startY) / 10;
+  //  for (int i = 0; i < 10; i++)
+  //  {
+  //    ::glTranslatef(GetTx(stepX), GetTy(stepY), 0);
+  //    ::glutPostRedisplay();
+  //  }
+  //}
 }
 
 void GlNacho::Draw()
@@ -59,8 +76,8 @@ void GlNacho::Draw()
   glBegin(GL_QUADS);
   glVertex2f(centerX + radius, -1.f*(float)maze->GetHeight());
   glVertex2f(centerX + radius, (float)maze->GetHeight());
-  glVertex2f((float)maze->GetWidth(), (float)maze->GetHeight());
-  glVertex2f((float)maze->GetWidth(), -1.f*(float)maze->GetHeight());
+  glVertex2f((float)maze->GetWidth() + 1.f, (float)maze->GetHeight());
+  glVertex2f((float)maze->GetWidth() + 1.f, -1.f*(float)maze->GetHeight());
   glEnd();
 
   glColor4f(0, 0, 0, 1);

@@ -8,8 +8,8 @@ private:
   Maze* maze;
   Nacho* nacho;
   float left, right, bottom, top;
-  float GetTx();
-  float GetTy();
+  float GetTx(size_t);
+  float GetTy(size_t);
 
 public:
   GlNacho(Maze*, Nacho*, float, float, float, float);

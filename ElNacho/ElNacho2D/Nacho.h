@@ -9,7 +9,13 @@ private:
   Maze* maze;
   size_t x;
   size_t y;
+
+  size_t oldx;
+  size_t oldy;
   float radius;
+
+  void SetX(size_t);
+  void SetY(size_t);
 
 public:
   Nacho(Maze*);
@@ -17,6 +23,8 @@ public:
 
   size_t GetX();
   size_t GetY();
+  size_t GetOldX();
+  size_t GetOldY();
 
   void Walk(Direction);
 

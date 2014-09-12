@@ -23,6 +23,28 @@ size_t Nacho::GetY()
   return y;
 }
 
+size_t Nacho::GetOldX()
+{
+  return oldx;
+}
+
+size_t Nacho::GetOldY()
+{
+  return oldy;
+}
+
+void Nacho::SetX(size_t nx)
+{
+  oldx = x;
+  x = nx;
+}
+
+void Nacho::SetY(size_t ny)
+{
+  oldy = y;
+  y = ny;
+}
+
 void Nacho::Walk(Direction direction)
 {
   std::map<Direction, size_t> Dx = { { North, 0 }, { South, 0 }, { East, 1 }, { West, -1 } };
@@ -33,8 +55,8 @@ void Nacho::Walk(Direction direction)
 
   if (!cell->HasWall(direction))
   {
-    x += Dx[direction];
-    y += Dy[direction];
+    SetX(x + Dx[direction]);
+    SetY(y + Dy[direction]);
 
     if (radius > 2.f)
     {
