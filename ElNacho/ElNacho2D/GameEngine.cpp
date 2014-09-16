@@ -1,6 +1,7 @@
 #include "GameEngine.h"
 #include "GameState.h"
 #include "OpenGL.h"
+#include "TextureManager.h"
 
 GameEngine::GameEngine()
 {
@@ -17,6 +18,11 @@ void GameEngine::Init(int argc, char** argv, const size_t screenWidth, const siz
   ::glutInitDisplayMode(GLUT_DOUBLE);
   ::glutInitWindowSize(screenWidth, screenHeight);
   ::glutCreateWindow(windowTitle);
+
+  TextureManager::Inst()->LoadTexture("Splash.bmp", TEX_SPLASH, GL_BGR_EXT);
+  TextureManager::Inst()->LoadTexture("Start.bmp", TEX_BEGIN, GL_BGR_EXT);
+  TextureManager::Inst()->LoadTexture("Target.bmp", TEX_TARGET, GL_BGR_EXT);
+  TextureManager::Inst()->LoadTexture("Battery.bmp", TEX_BATTERY, GL_BGR_EXT);
 }
 
 bool GameEngine::InitGL()
@@ -28,10 +34,6 @@ bool GameEngine::InitGL()
   //Initialize Modelview Matrix
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-
-  //Enable alpha channel blending
-  glEnable(GL_BLEND);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   //Initialize clear color
   glClearColor(0.f, 0.f, 0.f, 1.f);

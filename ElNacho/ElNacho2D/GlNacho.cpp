@@ -31,23 +31,6 @@ void GlNacho::Scale()
 void GlNacho::Translate()
 {
   ::glTranslatef(GetTx(nacho->GetX()), GetTy(nacho->GetY()), 0);
-
-  //float startX = (float)nacho->GetOldX();
-  //float startY = (float)nacho->GetOldY();
-  //
-  //float endX = (float)nacho->GetX();
-  //float endY = (float)nacho->GetY();
-
-  //if (startX != endX)
-  //{
-  //  float stepX = (endX - startX) / 10;
-  //  float stepY = (endY - startY) / 10;
-  //  for (int i = 0; i < 10; i++)
-  //  {
-  //    ::glTranslatef(GetTx(stepX), GetTy(stepY), 0);
-  //    ::glutPostRedisplay();
-  //  }
-  //}
 }
 
 void GlNacho::Draw()

@@ -13,7 +13,7 @@ private:
 
   static PlayState* instance;
   
-  size_t level = 0;
+  size_t level = 1;
   Maze* maze;
   Nacho* nacho;
 

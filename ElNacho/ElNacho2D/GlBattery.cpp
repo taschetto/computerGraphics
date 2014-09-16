@@ -1,20 +1,41 @@
-#include "GlInitial.h"
+#include "GlBattery.h"
 #include "TextureManager.h"
 #include "GameEngine.h"
 
-GlInitial::GlInitial(Maze* maze, Cell* cell)
-: GlCell(maze, cell)
+GlBattery::GlBattery(Maze* maze, Cell* cell)
+: maze(maze)
+, cell(cell)
 {
 }
 
-GlInitial::~GlInitial()
+GlBattery::~GlBattery()
 {
 }
 
-void GlInitial::Draw()
+float GlBattery::GetTx()
+{
+  return (float)cell->GetX();
+}
+
+float GlBattery::GetTy()
+{
+  return maze->GetHeight() - (float)cell->GetY() - 1;
+}
+
+void GlBattery::Scale()
+{
+
+}
+
+void GlBattery::Translate()
+{
+  glTranslatef(GetTx(), GetTy(), 0.0f);
+}
+
+void GlBattery::Draw()
 {
   glEnable(GL_TEXTURE_2D);
-  TextureManager::Inst()->BindTexture(TEX_BEGIN);
+  TextureManager::Inst()->BindTexture(TEX_BATTERY);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

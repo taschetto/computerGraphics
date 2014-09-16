@@ -5,13 +5,14 @@
 
 namespace
 {
-  const int ScreenWidth = 1000;
-  const int ScreenHeight = 500;
+  const int ScreenWidth = 1024;
+  const int ScreenHeight = 725;
   const char* WindowTitle = "El Nacho: a game by Guilherme Taschetto";
 
   void doDisplay(void);
   void doKeyboard(unsigned char, int, int);
   void doSpecialFunc(int, int, int);
+  void doResize(int, int);
 
   GameEngine engine;
 }

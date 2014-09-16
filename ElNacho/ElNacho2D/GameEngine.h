@@ -2,6 +2,11 @@
 
 #include <vector>
 
+#define TEX_SPLASH 1
+#define TEX_BEGIN 2
+#define TEX_TARGET 3
+#define TEX_BATTERY 4
+
 class GameState;
 
 class GameEngine

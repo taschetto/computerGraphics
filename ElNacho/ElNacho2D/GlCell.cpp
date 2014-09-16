@@ -40,28 +40,24 @@ void GlCell::Draw()
 
   if (cell->HasWall(North))
   {
-    //glColor3f(0., 0., 1.);
     glVertex2i(0, 1);
     glVertex2i(1, 1);
   }
 
   if (cell->HasWall(South))
   {
-    //glColor3f(1., 1., 0.);
     glVertex2i(0, 0);
     glVertex2i(1, 0);
   }
 
   if (cell->HasWall(West))
   {
-    //glColor3f(1., 0., 1.);
     glVertex2i(0, 0);
     glVertex2i(0, 1);
   }
 
   if (cell->HasWall(East))
   {
-    //glColor3f(0., 1., 0.);
     glVertex2i(1, 0);
     glVertex2i(1, 1);
   }

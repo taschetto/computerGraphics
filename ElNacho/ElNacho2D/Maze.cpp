@@ -8,9 +8,10 @@
 
 using namespace std;
 
-Maze::Maze(size_t height, size_t width)
-  : height(height)
-  , width(width)
+Maze::Maze(size_t level)
+  : level(level)
+  , height(level)
+  , width((size_t)(level * 1.33))
   , initial(nullptr)
   , goal(nullptr)
 {
@@ -127,5 +128,15 @@ void Maze::Generate()
   {
     this->goal = &grid[std::rand() % height][std::rand() % width];
     if (goal != initial) break;
+  }
+
+  int i = 0, batCount = level / 10 + 1;
+  Batteries.clear();
+  for (;;)
+  {
+    Cell* battery = &grid[std::rand() % height][std::rand() % width];
+    if (battery == initial || battery == goal) continue;
+    Batteries.push_back(battery);
+    if (++i >= batCount) break;
   }
 }

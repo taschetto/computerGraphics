@@ -4,6 +4,7 @@
 #include "GlInitial.h"
 #include "GlGoal.h"
 #include "GlNacho.h"
+#include "GlBattery.h"
 #include "IDrawable.h"
 #include "Maze.h"
 #include "Nacho.h"
@@ -14,8 +15,7 @@ PlayState *PlayState::instance = 0;
 
 void PlayState::Init()
 {
-  size_t size = level + 2;
-  maze = new Maze(size, 2 * size);
+  maze = new Maze(level + 4);
   nacho = new Nacho(maze);
 }
 
@@ -53,6 +53,7 @@ void PlayState::Draw()
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
+  float ratio = 1.33f;
   float padding = 0.5;
   float left = 0;
   float right = (float)maze->GetWidth();
@@ -67,10 +68,8 @@ void PlayState::Draw()
 
   std::vector<IDrawable*> drawables;
 
-  for (Cell* cell : maze->Cells())
-  {
-    drawables.push_back(new GlCell(maze, cell));
-  }
+  for (Cell* cell : maze->Cells()) drawables.push_back(new GlCell(maze, cell));
+  for (Cell* cell : maze->GetBatteries()) drawables.push_back(new GlBattery(maze, cell));
 
   drawables.push_back(new GlInitial(maze, maze->GetInitial()));
   drawables.push_back(new GlGoal(maze, maze->GetGoal()));
@@ -89,6 +88,7 @@ void PlayState::Draw()
     delete drawable;
   drawables.clear();
   
+  glFlush();
   glutSwapBuffers();
 }
 
