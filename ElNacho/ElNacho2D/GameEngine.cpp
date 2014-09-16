@@ -19,10 +19,11 @@ void GameEngine::Init(int argc, char** argv, const size_t screenWidth, const siz
   ::glutInitWindowSize(screenWidth, screenHeight);
   ::glutCreateWindow(windowTitle);
 
-  TextureManager::Inst()->LoadTexture("Splash.bmp", TEX_SPLASH, GL_BGR_EXT);
-  TextureManager::Inst()->LoadTexture("Start.bmp", TEX_BEGIN, GL_BGR_EXT);
-  TextureManager::Inst()->LoadTexture("Target.bmp", TEX_TARGET, GL_BGR_EXT);
-  TextureManager::Inst()->LoadTexture("Battery.bmp", TEX_BATTERY, GL_BGR_EXT);
+  TextureManager::Inst()->LoadTexture("splash.png", TEX_SPLASH, GL_BGRA_EXT);
+  TextureManager::Inst()->LoadTexture("initial.png", TEX_BEGIN, GL_BGRA_EXT);
+  TextureManager::Inst()->LoadTexture("goal.png", TEX_TARGET, GL_BGRA_EXT);
+  TextureManager::Inst()->LoadTexture("battery.png", TEX_BATTERY, GL_BGRA_EXT);
+  TextureManager::Inst()->LoadTexture("nacho.png", TEX_NACHO, GL_BGRA_EXT);
 }
 
 bool GameEngine::InitGL()

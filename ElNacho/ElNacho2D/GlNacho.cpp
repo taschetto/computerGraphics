@@ -1,6 +1,8 @@
 #include "GlNacho.h"
 #include "OpenGL.h"
 #include "Nacho.h"
+#include "GameEngine.h"
+#include "TextureManager.h"
 
 #include <vector>
 
@@ -38,12 +40,27 @@ void GlNacho::Draw()
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  glColor3f(1, 1, 0);
-  glBegin(GL_TRIANGLES);
-    glVertex2f(0.2f, 0.2f);
-    glVertex2f(0.5f, 0.8f);
-    glVertex2f(0.8f, 0.2f);
+  //glColor3f(1, 1, 0);
+  //glBegin(GL_QUADS);
+  //  glVertex2f(0.2f, 0.2f);
+  //  glVertex2f(0.5f, 0.8f);
+  //  glVertex2f(0.8f, 0.2f);
+  //glEnd();
+
+  glColor4f(1, 1, 1, 1);
+  glEnable(GL_TEXTURE_2D);
+  TextureManager::Inst()->BindTexture(TEX_NACHO);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+  glBegin(GL_QUADS);
+  glTexCoord2f(0.0f, 0.0f); glVertex2f(0.2f, 0.2f);
+  glTexCoord2f(1.0f, 0.0f); glVertex2f(0.8f, 0.2f);
+  glTexCoord2f(1.0f, 1.0f); glVertex2f(0.8f, 0.8f);
+  glTexCoord2f(0.0f, 1.0f); glVertex2f(0.2f, 0.8f);
   glEnd();
+  glDisable(GL_TEXTURE_2D);
 
   float centerX = 0.5, centerY = 0.5, radius = nacho->GetRadius();
 

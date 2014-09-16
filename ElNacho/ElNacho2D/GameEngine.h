@@ -6,6 +6,7 @@
 #define TEX_BEGIN 2
 #define TEX_TARGET 3
 #define TEX_BATTERY 4
+#define TEX_NACHO 5
 
 class GameState;
 
