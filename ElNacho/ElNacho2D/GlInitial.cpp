@@ -13,6 +13,7 @@ GlInitial::~GlInitial()
 
 void GlInitial::Draw()
 {
+  glColor4f(1, 1, 1, 1);
   glEnable(GL_TEXTURE_2D);
   TextureManager::Inst()->BindTexture(TEX_BEGIN);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

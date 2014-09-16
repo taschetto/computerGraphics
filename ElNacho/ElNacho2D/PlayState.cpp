@@ -50,36 +50,31 @@ void PlayState::HandleEvents(GameEngine* engine)
 
 void PlayState::Draw()
 {
-  glMatrixMode(GL_MODELVIEW);
+  glClearColor(0, 0, 0, 1);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
   glLoadIdentity();
 
-  float ratio = 1.33f;
-  float padding = 0.5;
-  float left = 0;
-  float right = (float)maze->GetWidth();
-  float bottom = 0;
-  float top = (float)maze->GetHeight();
+  const float padding = 0.5;
+  const float left = 0, bottom = 0;
+  const float right = (float)maze->GetWidth(), top = (float)maze->GetHeight();
 
   gluOrtho2D(left - padding, right + padding, bottom - padding, top + padding);
-  glPushMatrix();
-
-  glClearColor(0, 0, 0, 1);
-  glClear(GL_COLOR_BUFFER_BIT);
 
   std::vector<IDrawable*> drawables;
-
   for (Cell* cell : maze->Cells()) drawables.push_back(new GlCell(maze, cell));
-  for (Cell* cell : maze->GetBatteries()) drawables.push_back(new GlBattery(maze, cell));
 
+  for (Cell* cell : maze->GetBatteries()) drawables.push_back(new GlBattery(maze, cell));
   drawables.push_back(new GlInitial(maze, maze->GetInitial()));
   drawables.push_back(new GlGoal(maze, maze->GetGoal()));
+
   drawables.push_back(new GlNacho(maze, nacho, left, right, bottom, top));
 
   for (IDrawable* drawable : drawables)
   {
     glPushMatrix();
-    drawable->Scale();
     drawable->Translate();
+    drawable->Scale();
     drawable->Draw();
     glPopMatrix();
   }
@@ -88,7 +83,6 @@ void PlayState::Draw()
     delete drawable;
   drawables.clear();
   
-  glFlush();
   glutSwapBuffers();
 }
 

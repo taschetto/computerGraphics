@@ -115,5 +115,14 @@
     <Image Include="Splash.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Battery.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Start.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Target.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

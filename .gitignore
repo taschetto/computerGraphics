@@ -213,7 +213,9 @@ FakesAssemblies/
 *.app
 
 # Exceptions
-!freeglut/bin/freeglut.dll
-!freeglut/bin/x64/freeglut.dll
-!freeglut/lib/freeglut.lib
-!freeglut/lib/x64/freeglut.lib
+!dependencies/bin/freeglut.dll
+!dependencies/bin/FreeImage.dll
+!dependencies/bin/x64/freeglut.dll
+!dependencies/lib/freeglut.lib
+!dependencies/lib/FreeImage.lib
+!dependencies/lib/x64/freeglut.lib

@@ -35,6 +35,9 @@ void GlNacho::Translate()
 
 void GlNacho::Draw()
 {
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
   glColor3f(1, 1, 0);
   glBegin(GL_TRIANGLES);
     glVertex2f(0.2f, 0.2f);
@@ -86,4 +89,6 @@ void GlNacho::Draw()
   glVertex2f((float)maze->GetWidth() + 1, -1.f*(float)maze->GetHeight() - 1);
   glVertex2f((float)maze->GetWidth() + 1, centerY - radius);
   glEnd();
+
+  glDisable(GL_BLEND);
 }
