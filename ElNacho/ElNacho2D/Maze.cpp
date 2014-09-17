@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <limits>
 #include <map>
 #include <stack>
 #include "Maze.h"
@@ -92,6 +93,8 @@ void Maze::Generate()
 
   stack<Cell*> cells;
   cells.push(initial);
+
+  size_t maxStackSize = std::numeric_limits<size_t>::min();
   
   while (cells.size() > 0)
   {
@@ -99,6 +102,12 @@ void Maze::Generate()
     
     size_t y = cell->GetY();
     size_t x = cell->GetX();
+
+    if (cells.size() > maxStackSize)
+    {
+      goal = &grid[y][x];
+      maxStackSize = cells.size();
+    }
 
     std::vector<Direction> directions = { North, South, East, West };
     std::random_shuffle(directions.begin(), directions.end());
@@ -122,12 +131,6 @@ void Maze::Generate()
       }
     }
     if (!any) cells.pop();
-  }
-
-  for (;;)
-  {
-    this->goal = &grid[std::rand() % height][std::rand() % width];
-    if (goal != initial) break;
   }
 
   int i = 0, batCount = level / 10 + 1;

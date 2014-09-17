@@ -26,10 +26,15 @@ public:
   size_t GetOldX();
   size_t GetOldY();
 
-  void Walk(Direction);
+  bool Walk(Direction);
 
   float GetRadius()
   {
     return radius;
+  }
+
+  void SetRadius(float nradius)
+  {
+    radius = nradius;
   }
 };

@@ -30,6 +30,13 @@ public:
   {
     return Batteries;
   }
+
+  void RemoveBattery(Cell* cell)
+  {
+    auto it = std::find(Batteries.begin(), Batteries.end(), cell);
+    if (it != Batteries.end())
+      Batteries.erase(it);
+  }
   
   void Generate();
 };

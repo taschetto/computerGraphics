@@ -7,6 +7,8 @@
 #define TEX_TARGET 3
 #define TEX_BATTERY 4
 #define TEX_NACHO 5
+#define TEX_HAMMER 6
+#define TEX_TICK 7
 
 class GameState;
 

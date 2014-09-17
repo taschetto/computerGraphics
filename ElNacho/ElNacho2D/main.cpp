@@ -7,12 +7,15 @@ namespace
 {
   const int ScreenWidth = 1024;
   const int ScreenHeight = 725;
+  const int ScreenFps = 60;
   const char* WindowTitle = "El Nacho: a game by Guilherme Taschetto";
 
   void doDisplay(void);
   void doKeyboard(unsigned char, int, int);
   void doSpecialFunc(int, int, int);
   void doResize(int, int);
+  void runMainLoop(int);
+
 
   GameEngine engine;
 }
@@ -32,9 +35,16 @@ int main(int argc, char** argv)
   ::glutDisplayFunc(::doDisplay);
   ::glutKeyboardFunc(::doKeyboard);
   ::glutSpecialFunc(::doSpecialFunc);
+  ::glutTimerFunc(1000 / ScreenFps, ::runMainLoop, 0);
   ::glutMainLoop();
 
   return 0;
+}
+
+void ::runMainLoop(int ms)
+{
+  glutPostRedisplay();
+  ::glutTimerFunc(ms, ::runMainLoop, ms);
 }
 
 void ::doDisplay(void)

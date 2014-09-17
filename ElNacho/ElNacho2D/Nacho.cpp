@@ -45,7 +45,7 @@ void Nacho::SetY(size_t ny)
   y = ny;
 }
 
-void Nacho::Walk(Direction direction)
+bool Nacho::Walk(Direction direction)
 {
   std::map<Direction, size_t> Dx = { { North, 0 }, { South, 0 }, { East, 1 }, { West, -1 } };
   std::map<Direction, size_t> Dy = { { North, -1 }, { South, 1 }, { East, 0 }, { West, 0 } };
@@ -63,5 +63,9 @@ void Nacho::Walk(Direction direction)
       float step = .1f;
       radius -= step;
     }
+
+    return true;
   }
+
+  return false;
 }

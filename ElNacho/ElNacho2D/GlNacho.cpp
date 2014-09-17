@@ -3,7 +3,6 @@
 #include "Nacho.h"
 #include "GameEngine.h"
 #include "TextureManager.h"
-
 #include <vector>
 
 GlNacho::GlNacho(Maze* maze, Nacho* nacho, float left, float right, float bottom, float top)
@@ -32,21 +31,11 @@ void GlNacho::Scale()
 
 void GlNacho::Translate()
 {
-  ::glTranslatef(GetTx(nacho->GetX()), GetTy(nacho->GetY()), 0);
+  ::glTranslatef(GetTx(nacho->GetX()), GetTy(nacho->GetY()), 0.0f);
 }
 
 void GlNacho::Draw()
 {
-  glEnable(GL_BLEND);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-  //glColor3f(1, 1, 0);
-  //glBegin(GL_QUADS);
-  //  glVertex2f(0.2f, 0.2f);
-  //  glVertex2f(0.5f, 0.8f);
-  //  glVertex2f(0.8f, 0.2f);
-  //glEnd();
-
   glColor4f(1, 1, 1, 1);
   glEnable(GL_TEXTURE_2D);
   TextureManager::Inst()->BindTexture(TEX_NACHO);

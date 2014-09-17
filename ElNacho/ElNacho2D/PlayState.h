@@ -17,6 +17,8 @@ private:
   Maze* maze;
   Nacho* nacho;
 
+  float walkFromX, walkFromY;
+
 public:
   void Init();
   void Cleanup();

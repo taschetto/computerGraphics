@@ -1,6 +1,8 @@
 #include "WinState.h"
 #include "OpenGL.h"
 #include "PlayState.h"
+#include "TextureManager.h"
+#include "GameEngine.h"
 
 WinState *WinState::instance = 0;
 

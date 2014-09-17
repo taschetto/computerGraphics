@@ -46,6 +46,18 @@ void PlayState::HandleEvents(GameEngine* engine)
     engine->ChangeState(WinState::Instance());
     ::glutPostRedisplay();
   }
+
+  // posteriormente substituir o vector de batteries por uma estrutura de dados mais adequada
+  // quem sabe um dicionário com chave sendo uma tupla?
+  for (Cell* cell : maze->GetBatteries())
+  {
+    if (nacho->GetX() == cell->GetX() && nacho->GetY() == cell->GetY())
+    {
+      maze->RemoveBattery(cell);
+      nacho->SetRadius(nacho->GetRadius() * 2);
+      ::glutPostRedisplay();
+    }
+  }
 }
 
 void PlayState::Draw()
@@ -54,6 +66,9 @@ void PlayState::Draw()
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   glLoadIdentity();
+
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   const float padding = 0.5;
   const float left = 0, bottom = 0;
@@ -67,7 +82,6 @@ void PlayState::Draw()
   for (Cell* cell : maze->GetBatteries()) drawables.push_back(new GlBattery(maze, cell));
   drawables.push_back(new GlInitial(maze, maze->GetInitial()));
   drawables.push_back(new GlGoal(maze, maze->GetGoal()));
-
   drawables.push_back(new GlNacho(maze, nacho, left, right, bottom, top));
 
   for (IDrawable* drawable : drawables)
@@ -110,6 +124,4 @@ void PlayState::SpecialFunc(GameEngine*, int key, int, int)
     nacho->Walk(West);
     break;
   }
-
-  glutPostRedisplay();
 }
