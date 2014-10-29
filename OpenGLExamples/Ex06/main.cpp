@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "GL/glut.h"
+#include <GL/glut.h>
 
 #define SENS_ROT	5.0
 #define SENS_OBS	1.0
@@ -495,6 +495,7 @@ void GerenciaTecladoEspecial(int key, int x, int y)
     break;
 
   case GLUT_KEY_LEFT:
+    printf("\nLeft.");
     if (bezier)
     {
       if (p1) BezierPoints[0][0] -= 0.2;
@@ -519,6 +520,7 @@ void GerenciaTecladoEspecial(int key, int x, int y)
     break;
 
   case GLUT_KEY_RIGHT:
+    printf("\nRight.");
     if (bezier)
     {
       if (p1) BezierPoints[0][0] += 0.2;
@@ -539,6 +541,56 @@ void GerenciaTecladoEspecial(int key, int x, int y)
       if (p2) BSplinePoints[1][0] += 0.2;
       if (p3) BSplinePoints[2][0] += 0.2;
       if (p4) BSplinePoints[3][0] += 0.2;
+    }
+    break;
+
+  case GLUT_KEY_UP:
+    printf("\nUP.");
+    if (bezier)
+    {
+      if (p1) BezierPoints[0][1] += 0.2;
+      if (p2) BezierPoints[1][1] += 0.2;
+      if (p3) BezierPoints[2][1] += 0.2;
+      if (p4) BezierPoints[3][1] += 0.2;
+    }
+    if (hermite)
+    {
+      if (p1) HermitePoints[0][1] += 0.2;
+      if (p2) HermitePoints[1][1] += 0.2;
+      if (p3) HermitePoints[2][1] += 0.2;
+      if (p4) HermitePoints[3][1] += 0.2;
+    }
+    if (bspline)
+    {
+      if (p1) BSplinePoints[0][1] += 0.2;
+      if (p2) BSplinePoints[1][1] += 0.2;
+      if (p3) BSplinePoints[2][1] += 0.2;
+      if (p4) BSplinePoints[3][1] += 0.2;
+    }
+    break;
+
+  case GLUT_KEY_DOWN:
+    printf("\nDown.");
+    if (bezier)
+    {
+      if (p1) BezierPoints[0][1] -= 0.2;
+      if (p2) BezierPoints[1][1] -= 0.2;
+      if (p3) BezierPoints[2][1] -= 0.2;
+      if (p4) BezierPoints[3][1] -= 0.2;
+    }
+    if (hermite)
+    {
+      if (p1) HermitePoints[0][1] -= 0.2;
+      if (p2) HermitePoints[1][1] -= 0.2;
+      if (p3) HermitePoints[2][1] -= 0.2;
+      if (p4) HermitePoints[3][1] -= 0.2;
+    }
+    if (bspline)
+    {
+      if (p1) BSplinePoints[0][1] -= 0.2;
+      if (p2) BSplinePoints[1][1] -= 0.2;
+      if (p3) BSplinePoints[2][1] -= 0.2;
+      if (p4) BSplinePoints[3][1] -= 0.2;
     }
     break;
   }
