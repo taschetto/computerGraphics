@@ -8,8 +8,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <PostBuildEvent>
-      <Command>xcopy /d /y "$(ProjectDir)..\..\dependencies\bin\freeglut.dll" "$(OutDir)"
-xcopy /d /y "$(ProjectDir)..\..\dependencies\bin\FreeImage.dll" "$(OutDir)"</Command>
+      <Command>xcopy /d /y "$(ProjectDir)..\..\dependencies\bin\*.dll" "$(OutDir)"
+</Command>
     </PostBuildEvent>
     <Link>
       <AdditionalDependencies>OpenGL32.lib;freeglut.lib;FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
