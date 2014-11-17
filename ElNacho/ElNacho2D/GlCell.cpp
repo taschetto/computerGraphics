@@ -34,33 +34,4 @@ void GlCell::Translate()
 
 void GlCell::Draw()
 {
-  glColor3f(0, 0, 1);
-  glLineWidth(2);
-  glBegin(GL_LINES);
-
-  if (cell->HasWall(North))
-  {
-    glVertex2i(0, 1);
-    glVertex2i(1, 1);
-  }
-
-  if (cell->HasWall(South))
-  {
-    glVertex2i(0, 0);
-    glVertex2i(1, 0);
-  }
-
-  if (cell->HasWall(West))
-  {
-    glVertex2i(0, 0);
-    glVertex2i(0, 1);
-  }
-
-  if (cell->HasWall(East))
-  {
-    glVertex2i(1, 0);
-    glVertex2i(1, 1);
-  }
-  
-  glEnd();
 }
